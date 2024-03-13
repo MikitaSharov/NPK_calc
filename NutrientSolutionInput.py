@@ -1,4 +1,4 @@
-from NutrientSolutionIO import NutrientSolutionIO
+from IO import IO
 from NutrientSolution import NutrientSolution
 
 class NutrientSolutionInput:
@@ -18,16 +18,16 @@ class NutrientSolutionInput:
 
     @staticmethod
     def input_nutrient_solution_from_file(filename):
-        return NutrientSolutionIO.load_from_file(filename)
+        return IO.load_solution_from_file(filename)
 
     @staticmethod
     def save_solution_to_file(solution, filename):
-        NutrientSolutionIO.save_to_file(solution, filename)
+        IO.save_solution_to_file(solution, filename)
         print(f"Питательный раствор '{solution.name}' сохранен в файл '{filename}'.")
 
     @staticmethod
     def load_solution_from_file(filename):
-        solution = NutrientSolutionIO.load_from_file(filename)
+        solution = IO.load_solution_from_file(filename)
         print(f"Питательный раствор '{solution.name}' загружен из файла '{filename}'.")
         return solution
 
@@ -45,9 +45,12 @@ class NutrientSolutionInput:
         else:
             print("Неверный ввод.")
             return None
-
-# Пример использования сохранения и загрузки данных из файла
-# solution = NutrientSolutionInput.menu()
-# if solution:
-#     loaded_solution = NutrientSolutionInput.load_solution_from_file('nutrient_solution.json')
-#     loaded_solution.display_solution()
+        
+    # Функция для форматирования раствора в строку
+    @staticmethod
+    def format_solution(solution):
+        solution_string = ""
+        for element, values in solution.elements.items():
+            solution_string += f"{element}: ({values['min']}-{values['max']}) "
+            
+        return solution_string

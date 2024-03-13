@@ -5,12 +5,23 @@ from NutrientSolutionCalculator import NutrientSolutionCalculator
 def main():
     nutrient_solution = NutrientSolutionInput.menu()
     if nutrient_solution:
-        NutrientSolutionInput.save_solution_to_file(nutrient_solution, 'nutrient_solution.json')
-        fertilizers = FertilizerInput.input_fertilizers()
-        calculated_solution = NutrientSolutionCalculator.calculate_solution(nutrient_solution, fertilizers)
-        print("\nРассчитанный питательный раствор:")
-        for element, content in calculated_solution.items():
-            print(f"{element}: {content}")
+        fertilizers = FertilizerInput.menu()
+        if fertilizers:
+            calculator = NutrientSolutionCalculator()
+            optimal_fertilizers = calculator.gradient_descent_with_constraints(calculator.initial_fertilizers)
+            print("Оптимальный состав удобрений:")
+            for fertilizer, amount in optimal_fertilizers.items():
+                print(f"{fertilizer}: {round(amount * 100, 0)} mg/l")
+            # Рассчет получившегося раствора
+            print("\nПолучившийся питательный раствор:")
+            calculated_solution = {}
+            for fertilizer_name, amount in optimal_fertilizers.items():
+                for element, value in calculator.available_fertilizers[fertilizer_name].items():
+                    calculated_solution[element] = calculated_solution.get(element, 0) + value * amount
+            # Форматирование раствора в строку и вывод
+            print(calculator.format_solution(calculated_solution))
+    print(NutrientSolutionInput.format_solution(nutrient_solution))
+    
 
 if __name__ == "__main__":
     main()

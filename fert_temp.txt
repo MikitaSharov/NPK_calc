@@ -1,0 +1,6 @@
+{"id": 7, "name": "Kristalon_Red", "elements": {"N": 12.0, "P": 5.23, "K": 29.88, "Mg": 0.6, "S": 1.0, "B": 0.025, "Cu": 0.01, "Fe": 0.07, "Mn": 0.04, "Mo": 0.004, "Zn": 0.025}}
+{"id": 8, "name": "Kristalon_Green", "elements": {"N": 18.0, "P": 7.85, "K": 14.94, "B": 0.05, "Cu": 0.02, "Fe": 0.14, "Mn": 0.08, "Mo": 0.008, "Zn": 0.05}}
+{"id": 4, "name": "SulfatMagnija", "elements": {"Mg": 10.2, "S": 13.5}}
+{"id": 3, "name": "Kristalon_Complex", "elements": {"N": 12.0, "P": 4.8, "K": 14.94, "Mg": 1.63, "S": 8.0, "B": 0.015, "Fe": 0.2, "Mn": 0.02, "Zn": 0.02}}
+{"id": 5, "name": "SuperFosfat_Bujski", "elements": {"N": 5.0, "P": 11.33, "Mg": 4.82, "Ca": 6.43}}
+{"id": 3, "name": "Kristalon_Complex", "elements": {"N": 12.0, "P": 4.8, "K": 14.94, "Mg": 1.63, "S": 8.0, "B": 0.015, "Fe": 0.2, "Mn": 0.02, "Zn": 0.02}}
