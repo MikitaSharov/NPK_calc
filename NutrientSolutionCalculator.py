@@ -1,19 +1,21 @@
 import json
 
+
 class NutrientSolutionCalculator:
-    def __init__(self):
+    def __init__(self, nutrient_solution):
         # Загрузка данных о растворе и удобрениях из файлов
-        with open("tuja.txt", "r") as solution_file:
-            self.solution_data = json.load(solution_file)
+        # with open("tuja.txt", "r") as solution_file:
+        #     self.solution_data = json.load(solution_file)
 
         with open("fertilizers.txt", "r") as fertilizers_file:
             self.fertilizers_data = [json.loads(line) for line in fertilizers_file]
 
         # Заданные элементы в растворе и их требуемые значения
-        self.target_elements = self.solution_data["elements"]
+        self.target_elements = nutrient_solution.elements
 
         # Доступные удобрения и их содержание элементов
-        self.available_fertilizers = {fertilizer["name"]: fertilizer["elements"] for fertilizer in self.fertilizers_data}
+        self.available_fertilizers = {fertilizer["name"]: fertilizer["elements"] for fertilizer in
+                                      self.fertilizers_data}
 
         # Ограничение на количество удобрений
         self.max_fertilizers = 8
@@ -27,7 +29,9 @@ class NutrientSolutionCalculator:
         for fertilizer_name, amount in fertilizers.items():
             for element, value in self.available_fertilizers[fertilizer_name].items():
                 total_elements[element] += value * amount
-        return sum(max(abs(total_elements[element] - self.target_elements[element]["min"]), abs(total_elements[element] - self.target_elements[element]["max"])) for element in self.target_elements)
+        return sum(max(abs(total_elements[element] - self.target_elements[element]["min"]),
+                       abs(total_elements[element] - self.target_elements[element]["max"])) for element in
+                   self.target_elements)
 
     # Метод градиентного спуска с ограничениями
     def gradient_descent_with_constraints(self, initial_fertilizers, max_iter=3000, tolerance=1e-5, step_size=0.01):
@@ -60,4 +64,4 @@ class NutrientSolutionCalculator:
         solution_string = ""
         for element, content in solution.items():
             solution_string += f"{element}: {round(content, 2)}, "
-        return solution_string.rstrip(", ")    
+        return solution_string.rstrip(", ")

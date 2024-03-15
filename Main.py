@@ -2,12 +2,13 @@ from NutrientSolutionInput import NutrientSolutionInput
 from FertilizerInput import FertilizerInput
 from NutrientSolutionCalculator import NutrientSolutionCalculator
 
+
 def main():
     nutrient_solution = NutrientSolutionInput.menu()
     if nutrient_solution:
         fertilizers = FertilizerInput.menu()
         if fertilizers:
-            calculator = NutrientSolutionCalculator()
+            calculator = NutrientSolutionCalculator(nutrient_solution)
             optimal_fertilizers = calculator.gradient_descent_with_constraints(calculator.initial_fertilizers)
             print("Оптимальный состав удобрений:")
             for fertilizer, amount in optimal_fertilizers.items():
@@ -21,7 +22,7 @@ def main():
             # Форматирование раствора в строку и вывод
             print(calculator.format_solution(calculated_solution))
     print(NutrientSolutionInput.format_solution(nutrient_solution))
-    
+
 
 if __name__ == "__main__":
     main()
